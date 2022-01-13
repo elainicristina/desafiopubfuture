@@ -16,6 +16,7 @@ export default function makeRoutes(app: Express, conn: Connection) {
     app.get('/contas/:id', ContaRoutes.getOne);
     app.put('/contas/:id', ContaRoutes.update);
     app.delete('/contas/:id', ContaRoutes.delete);
+    app.post('/contas/transferencia', ContaRoutes.transferencia);
 
     DespesaRoutes.service = new DespesaService(conn);
 

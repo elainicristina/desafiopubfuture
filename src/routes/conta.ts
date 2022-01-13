@@ -6,10 +6,23 @@ export class ContaRoutes extends ModelBaseRoute {
 
     static service: ContaService;
 
+    static async transferencia(req: Request, res: Response, next: Function): Promise<void> {
+        try {
+            res.status(200);
+            res.json(await ContaRoutes.service.transferencia(req.body));
+        }
+        catch (error) {
+            console.log(error);
+
+            res.status(500);
+            res.json({message: 'Internal server error'});
+        }
+    }
+
     static async getAll(req: Request, res: Response, next: Function): Promise<void> {
         try {
             res.status(200);
-            res.json(await ContaRoutes.service.getAll());
+            res.json(await ContaRoutes.service.getAll(req.query));
         }
         catch (error) {
             console.log(error);
