@@ -1,4 +1,4 @@
-import { Connection, EntityColumnNotFound, Repository } from "typeorm";
+import { Connection, EntityColumnNotFound, Repository, Between } from "typeorm";
 import { BaseService } from "./base";
 import { Despesa } from "../models/desespesas";
 
@@ -16,13 +16,17 @@ export class DespesaService implements BaseService {
 
        try {
 
+        if(queryParameters.dataInicio && queryParameters.dataFim){
+            return await this.repository.find({
+                dataPagamento: Between(queryParameters.dataInicio, queryParameters.dataFim)
+            });
+        }
+
         return await this.repository.find(queryParameters);
         
        }
        catch {
-
-        console.log("Error in search")
-
+            console.log("Error in search")
        }
     }
 

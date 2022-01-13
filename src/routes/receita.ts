@@ -9,7 +9,7 @@ export class ReceitaRouter extends ModelBaseRoute {
     static async getAll(req: Request, res: Response, next: Function): Promise<void> {
         try {
             res.status(200);
-            res.json(await ReceitaRouter.service.getAll());
+            res.json(await ReceitaRouter.service.getAll(req.query));
         }
         catch (error) {
             console.log(error);

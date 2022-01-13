@@ -1,4 +1,4 @@
-import { Connection, EntityColumnNotFound, Repository } from "typeorm";
+import { Connection, EntityColumnNotFound, Repository, Between} from "typeorm";
 import { BaseService } from "./base";
 import { Receita } from "../models/receita";
 
@@ -12,12 +12,26 @@ export class ReceitaService implements BaseService {
         this.repository = connection.getRepository(Receita);
     }
 
-    async getAll(): Promise<Receita[]> {
-        return await this.repository.find();
+    async getAll(queryParameters: any): Promise<Receita[] |undefined > {
+
+        try {
+
+            if(queryParameters.dataInicio && queryParameters.dataFim){
+                return await this.repository.find({
+                    dataRecebimento: Between(queryParameters.dataInicio, queryParameters.dataFim)
+                });
+            }
+    
+            return await this.repository.find(queryParameters);
+            
+           }
+           catch {
+                console.log("Error in search")
+           }
     }
 
     async getOne(id: number): Promise<Receita | undefined> {
-        let receita;
+
         return await this.repository.findOne(id);
     }
 
