@@ -6,18 +6,6 @@ export class ContaRoutes extends ModelBaseRoute {
 
     static service: ContaService;
 
-    static async transferencia(req: Request, res: Response, next: Function): Promise<void> {
-        try {
-            res.status(200);
-            res.json(await ContaRoutes.service.transferencia(req.body));
-        }
-        catch (error) {
-            console.log(error);
-
-            res.status(500);
-            res.json({message: 'Internal server error'});
-        }
-    }
 
     static async getAll(req: Request, res: Response, next: Function): Promise<void> {
         try {
@@ -31,6 +19,7 @@ export class ContaRoutes extends ModelBaseRoute {
             res.json({message: 'Internal server error'});
         }
     }
+
 
     static async getOne(req: Request, res: Response, next: Function): Promise<void> {
         try {
@@ -55,6 +44,35 @@ export class ContaRoutes extends ModelBaseRoute {
         }        
     }
 
+
+    static async transferencia(req: Request, res: Response, next: Function): Promise<void> {
+            try {
+                res.status(200);
+                res.json(await ContaRoutes.service.transferencia(req.body));
+            }
+            catch (error) {
+                console.log(error);
+
+                res.status(500);
+                res.json({message: 'Internal server error'});
+            }
+    }
+
+
+    static async total(req: Request, res: Response, next: Function): Promise<void> {
+            try {
+                res.status(200);
+                res.json(await ContaRoutes.service.totalSaldo());
+            }
+            catch (error) {
+                console.log(error);
+
+                res.status(500);
+                res.json({message: 'Internal server error'});
+            }
+    }
+
+
     static async create(req: Request, res: Response, next: Function): Promise<void> {
         try {
 
@@ -78,6 +96,7 @@ export class ContaRoutes extends ModelBaseRoute {
             res.json({message: 'Internal server error'});
         }        
     }
+
 
     static async update(req: Request, res: Response, next: Function): Promise<void> {
         try {
@@ -104,6 +123,7 @@ export class ContaRoutes extends ModelBaseRoute {
         }        
     }
 
+    
     static async delete(req: Request, res: Response, next: Function): Promise<void> {
         try {
             const id = Number(req.params.id);

@@ -11,12 +11,13 @@ export default function makeRoutes(app: Express, conn: Connection) {
 
     ContaRoutes.service = new ContaService(conn);
 
+    app.get('/contas/total', ContaRoutes.total);
+    app.post('/contas/transferencia', ContaRoutes.transferencia);
     app.get('/contas', ContaRoutes.getAll);
     app.post('/contas', ContaRoutes.create);
     app.get('/contas/:id', ContaRoutes.getOne);
     app.put('/contas/:id', ContaRoutes.update);
     app.delete('/contas/:id', ContaRoutes.delete);
-    app.post('/contas/transferencia', ContaRoutes.transferencia);
 
     DespesaRoutes.service = new DespesaService(conn);
 

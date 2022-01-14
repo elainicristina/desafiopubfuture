@@ -4,6 +4,7 @@ import { Conta } from "../models/contas";
 
 interface ContaInterface {
     transferencia(body: any): Promise<any |undefined>; 
+    totalSaldo(): Promise<any |undefined>; 
 }
 
 export class ContaService implements BaseService, ContaInterface {
@@ -16,23 +17,17 @@ export class ContaService implements BaseService, ContaInterface {
         this.repository = connection.getRepository(Conta);
     }
 
-    async getAll(queryParameters: any): Promise<Conta[] | undefined> {
-        try {
-
-            if(queryParameters.saldo){
-            }
     
-            return await this.repository.find(queryParameters);
-            
-           }
-           catch {
-                console.log("Error in search")
-           }
+    async getAll(queryParameters: any): Promise<Conta[] | undefined> {
+       
+        return await this.repository.find(queryParameters);
     }
+
 
     async getOne(id: number): Promise<Conta | undefined> {
         return await this.repository.findOne(id);
     }
+
 
     async create(entity: any): Promise<Conta | undefined> {
         let contas;
@@ -50,6 +45,7 @@ export class ContaService implements BaseService, ContaInterface {
         return contas;
     }
 
+
     async update(id: number, values: any): Promise<Conta | undefined> {
         const contas = await this.repository.findOne(id);
 
@@ -63,6 +59,7 @@ export class ContaService implements BaseService, ContaInterface {
 
         return contas;
     }
+
 
     async transferencia(body: any): Promise<any | undefined> {
 
@@ -96,6 +93,17 @@ export class ContaService implements BaseService, ContaInterface {
       
 
     }
+
+
+    async totalSaldo(): Promise<any | undefined> {
+        const { total } = await this.repository
+            .createQueryBuilder('totalSaldo')
+            .select('SUM(saldo)', 'total')
+            .getRawOne();
+
+        return { totalSaldo: total };
+    }
+
 
     async delete(id: number): Promise<Conta | undefined> {
         const contas = await this.repository.findOne(id);
