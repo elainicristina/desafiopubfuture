@@ -1,0 +1,36 @@
+{
+  "name": "gerenciadorFinancas",
+  "version": "1.0.0",
+  "description": "Gerenciador de finanças.",
+  "main": "index.js",
+  "dependencies": {
+    "@types/knex": "^0.16.1",
+    "cors": "^2.8.5",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "knex": "^0.95.15",
+    "mysql": "^2.18.1",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "start": "tsc && node ./build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elainicristina/gerenciadorFinancas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elainicristina/gerenciadorFinancas/issues"
+  },
+  "homepage": "https://github.com/elainicristina/gerenciadorFinancas#readme"
+}
